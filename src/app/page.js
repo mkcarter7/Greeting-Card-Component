@@ -16,10 +16,15 @@ function Home() {
   const [buttonText, setButtonText] = useState('Get a Greeting');
 
   const handleClick = () => {
-    if (buttonText === 'Get a Greeting' || buttonText === 'Show me another greeting') {
+    if (buttonText === 'Get a Greeting' || buttonText === 'Show me another Greeting') {
       getGreetings().then((data) => {
-        setGreeting(data);
+        // Extract greetings into an array
+        const greetingsArray = Object.values(data).map((item) => item.greeting);
 
+        // Pick a random greeting (or customize as needed)
+        const randomGreeting = greetingsArray[Math.floor(Math.random() * greetingsArray.length)];
+
+        setGreeting(randomGreeting);
         setButtonText('Show me another Greeting');
       });
     }
@@ -31,6 +36,13 @@ function Home() {
 
   return (
     <>
+      <div>
+        <h1>Hello {user.displayName}! </h1>
+        <p>Click the button below to logout!</p>
+        <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+          Sign Out
+        </Button>
+      </div>
       <div
         className="text-center d-flex flex-column justify-content-center align-content-center"
         style={{
@@ -47,14 +59,6 @@ function Home() {
         </Button>
         <Button style={{ marginTop: '15px' }} onClick={handleClear}>
           clear
-        </Button>
-      </div>
-
-      <div>
-        <h1>Hello {user.displayName}! </h1>
-        <p>Click the button below to logout!</p>
-        <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-          Sign Out
         </Button>
       </div>
     </>
