@@ -4,7 +4,7 @@ const endpoint = clientCredentials.databaseURL;
 
 const getGreetings = () =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}`, {
+    fetch(`${endpoint}/greetings.json}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
